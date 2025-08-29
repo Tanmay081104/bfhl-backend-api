@@ -4,68 +4,74 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
+// Middleware setup
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 
-// Helper functions
-function isNumber(str) {
+// Utility functions for data type checking
+const isNumber = (str) => {
     return !isNaN(str) && !isNaN(parseFloat(str));
-}
+};
 
-function isAlphabet(str) {
+const isAlphabet = (str) => {
     return /^[a-zA-Z]$/.test(str);
-}
+};
 
-function isSpecialCharacter(str) {
+const isSpecialChar = (str) => {
     return !isNumber(str) && !isAlphabet(str);
-}
+};
 
-function processData(data) {
-    const evenNumbers = [];
-    const oddNumbers = [];
-    const alphabets = [];
-    const specialCharacters = [];
-    let numericSum = 0;
-    let alphabetString = '';
+// Main data processing function
+function processInputData(inputArray) {
+    const result = {
+        evenNumbers: [],
+        oddNumbers: [],
+        alphabets: [],
+        specialCharacters: [],
+        numericSum: 0,
+        alphabetString: ''
+    };
 
-    data.forEach(item => {
-        const str = String(item);
+    // Process each item in the input array
+    inputArray.forEach(item => {
+        const itemStr = String(item);
         
-        if (isNumber(str)) {
-            const num = parseInt(str);
-            if (num % 2 === 0) {
-                evenNumbers.push(str);
+        if (isNumber(itemStr)) {
+            const numValue = parseInt(itemStr);
+            // Check if even or odd
+            if (numValue % 2 === 0) {
+                result.evenNumbers.push(itemStr);
             } else {
-                oddNumbers.push(str);
+                result.oddNumbers.push(itemStr);
             }
-            numericSum += num;
-        } else if (isAlphabet(str)) {
-            alphabets.push(str.toUpperCase());
-            alphabetString += str.toLowerCase();
-        } else if (isSpecialCharacter(str)) {
-            specialCharacters.push(str);
+            result.numericSum += numValue;
+        } else if (isAlphabet(itemStr)) {
+            result.alphabets.push(itemStr.toUpperCase());
+            result.alphabetString += itemStr.toLowerCase();
+        } else if (isSpecialChar(itemStr)) {
+            result.specialCharacters.push(itemStr);
         }
     });
 
-    // Create concatenated string with alternating capitalization in reverse order
-    let concatString = '';
-    const reversedAlphabet = alphabetString.split('').reverse();
-    reversedAlphabet.forEach((char, index) => {
-        if (index % 2 === 0) {
-            concatString += char.toUpperCase();
+    // Generate concatenated string with alternating caps (reversed)
+    let concatenatedStr = '';
+    const reversedAlphabets = result.alphabetString.split('').reverse();
+    
+    for (let i = 0; i < reversedAlphabets.length; i++) {
+        if (i % 2 === 0) {
+            concatenatedStr += reversedAlphabets[i].toUpperCase();
         } else {
-            concatString += char.toLowerCase();
+            concatenatedStr += reversedAlphabets[i].toLowerCase();
         }
-    });
+    }
 
     return {
-        evenNumbers,
-        oddNumbers,
-        alphabets,
-        specialCharacters,
-        sum: String(numericSum),
-        concatString
+        evenNumbers: result.evenNumbers,
+        oddNumbers: result.oddNumbers,
+        alphabets: result.alphabets,
+        specialCharacters: result.specialCharacters,
+        sum: String(result.numericSum),
+        concatString: concatenatedStr
     };
 }
 
@@ -82,13 +88,13 @@ app.post('/bfhl', (req, res) => {
             });
         }
 
-        const processedData = processData(data);
+        const processedData = processInputData(data);
 
         const response = {
             is_success: true,
-            user_id: "john_doe_17091999",
-            email: "john@xyz.com",
-            roll_number: "ABCD123",
+            user_id: "tanmay_bhatnagar_29082025",
+            email: "tanmay.bhatnagar@student.edu",
+            roll_number: "TB2025001",
             odd_numbers: processedData.oddNumbers,
             even_numbers: processedData.evenNumbers,
             alphabets: processedData.alphabets,

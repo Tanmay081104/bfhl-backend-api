@@ -1,22 +1,30 @@
 {
   "name": "bfhl-api",
   "version": "1.0.0",
-  "description": "REST API for BFHL challenge with data processing capabilities",
+  "description": "Backend API for BFHL coding challenge - processes mixed data arrays",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["api", "rest", "express", "node", "bfhl"],
-  "author": "John Doe",
-  "license": "ISC",
+  "keywords": [
+    "bfhl",
+    "api",
+    "backend",
+    "data-processing",
+    "express"
+  ],
+  "author": "Tanmay Bhatnagar <tanmay.bhatnagar@example.com>",
+  "license": "MIT",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }

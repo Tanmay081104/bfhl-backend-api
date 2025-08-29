@@ -1,6 +1,9 @@
-# BFHL REST API
+# BFHL Challenge API
 
-A REST API built with Node.js and Express that processes arrays of mixed data types (numbers, alphabets, and special characters).
+> **Built by Tanmay Bhatnagar**  
+> A robust backend API solution for the BFHL coding challenge
+
+This Node.js Express API efficiently processes arrays containing mixed data types (numbers, alphabetic characters, and special symbols) and returns structured, categorized results.
 
 ## Features
 
@@ -28,9 +31,9 @@ Processes an array of mixed data types.
 ```json
 {
   "is_success": true,
-  "user_id": "john_doe_17091999",
-  "email": "john@xyz.com",
-  "roll_number": "ABCD123",
+  "user_id": "tanmay_bhatnagar_29082025",
+  "email": "tanmay.bhatnagar@student.edu",
+  "roll_number": "TB2025001",
   "odd_numbers": ["1"],
   "even_numbers": ["334", "4"],
   "alphabets": ["A", "R"],
