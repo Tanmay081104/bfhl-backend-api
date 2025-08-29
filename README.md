@@ -1,94 +1,33 @@
-# BFHL Challenge API
-
-> **Built by Tanmay Bhatnagar**  
-> A robust backend API solution for the BFHL coding challenge
-
-This Node.js Express API efficiently processes arrays containing mixed data types (numbers, alphabetic characters, and special symbols) and returns structured, categorized results.
-
-## Features
-
-- Processes mixed data arrays containing numbers, alphabets, and special characters
-- Separates even and odd numbers
-- Extracts alphabets and converts to uppercase
-- Identifies special characters
-- Calculates sum of all numeric values
-- Creates concatenated string with alternating capitalization in reverse order
-
-## API Endpoints
-
-### POST /bfhl
-
-Processes an array of mixed data types.
-
-**Request Body:**
-```json
-{
-  "data": ["a", "1", "334", "4", "R", "$"]
-}
-```
-
-**Response:**
-```json
-{
-  "is_success": true,
-  "user_id": "tanmay_bhatnagar_29082025",
-  "email": "tanmay.bhatnagar@student.edu",
-  "roll_number": "TB2025001",
-  "odd_numbers": ["1"],
-  "even_numbers": ["334", "4"],
-  "alphabets": ["A", "R"],
-  "special_characters": ["$"],
-  "sum": "339",
-  "concat_string": "Ra"
-}
-```
-
-### GET /health
-
-Health check endpoint.
-
-**Response:**
-```json
-{
-  "status": "OK",
-  "timestamp": "2025-08-29T05:01:29.123Z"
-}
-```
-
-## Installation
-
-1. Clone this repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the server:
-   ```bash
-   npm start
-   ```
-
-The server will run on port 3000 by default, or the port specified in the `PORT` environment variable.
-
-## Testing
-
-You can test the API using curl:
-
-```bash
-curl -X POST http://localhost:3000/bfhl \
-  -H "Content-Type: application/json" \
-  -d '{"data": ["a","1","334","4","R","$"]}'
-```
-
-## Deployment
-
-This API is designed to be deployed on platforms like:
-- Vercel
-- Railway
-- Render
-- Heroku
-
-Make sure to set the `PORT` environment variable if required by your hosting provider.
-
-## License
-
-ISC
+Objective
+Build and host a REST API (Method: POST) that takes in an array and returns the
+following:
+1. Status
+2. User ID
+3. Email ID
+4. College Roll Number
+5. Array for even numbers
+6. Array for odd numbers
+7. Array for alphabets, converted to uppercase
+8. Array for special characters
+9. Sum of numbers
+10. Concatenation of all alphabetical characters present in the input in the reverse
+order in alternating caps
+Preferred Tech Stack
+Node.js / Python / Java
+Hosting
+Any provider of your choice. If you don’t have one already, please use Vercel / Railway /
+Render any other provider which supports REST API hosting.
+Also push your code to a public Github Repository
+Logic
+Response should always contain “user_id” in the following format :
+"user_id": {full_name_ddmmyyyy}
+E.g.: "user_id”: "john_doe_17091999"
+NOTE: Full name must be in lowercase
+“is_success” should be returned in the response to mark the status of operation. It can
+be true / false.
+Be sure to follow other best practices and handle exceptions gracefully
+Hosted API
+Method: POST
+Route: /bfhl
+Expected status code for successful requests: 200
+Example: https://testbfhl.herokuapp.com/bfhl
